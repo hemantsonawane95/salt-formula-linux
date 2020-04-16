@@ -1,0 +1,14 @@
+classes:
+- cluster.cloud.infra.mon
+parameters:
+  _param:
+    ceph_public_address: 10.19.2.232
+    linux_system_codename: bionic
+    network_netmask: 255.255.252.0
+    single_address: 10.11.2.232
+  linux:
+    system:
+      name: fast-mon02
+      domain: cloud.local
+      cluster: default
+      environment: prd

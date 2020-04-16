@@ -1,0 +1,19 @@
+classes:
+- cluster.cloud.infra.compute.compute
+- cluster.cloud.infra.networking.compute
+parameters:
+  _param:
+    ceph_fast_address: 10.19.2.106
+    ceph_slow_address: 10.18.2.106
+    control_address: 10.12.2.106
+    linux_system_codename: xenial
+    primary_nic: eno1
+    secondary_nic: eno2
+    single_address: 10.11.2.106
+    test_address: 10.23.2.106
+  linux:
+    system:
+      name: apod03nod06
+      domain: cloud.local
+      cluster: default
+      environment: prd

@@ -1,0 +1,57 @@
+parameters:
+  ntp:
+    client:
+      enabled: true
+      stratum:
+        primary:
+          server: 185.22.96.20
+  linux:
+    system:
+      file:
+        /etc/docker/daemon.json:
+          contents: |
+            {
+              "live-restore": true,
+              "max-concurrent-downloads": 10,
+              "oom-score-adjust": -999,
+              "bip": "192.168.63.1/24",
+              "storage-driver": "overlay2"
+            }
+      service:
+        systemd-timesyncd.service:
+          status: disabled
+      apparmor:
+        enabled: false
+      user:
+        root:
+          enabled: true
+          name: root
+          home: /root
+          # hariseldon
+          password: $1$XfJPRPLN$VP/4i6FiQ9mr3HesQ35S00
+    network:
+      resolv:
+        dns:
+        - 8.8.4.4
+        - 8.8.8.8 
+      host:
+        ceph04:
+          address: ${_param:ceph04_address}
+          names:
+          - ${_param:ceph04_hostname}
+          - ${_param:ceph04_hostname}.${_param:cluster_domain}
+        ceph02:
+          address: ${_param:ceph02_address}
+          names:
+          - ${_param:ceph02_hostname}
+          - ${_param:ceph02_hostname}.${_param:cluster_domain}
+        ceph03:
+          address: ${_param:ceph03_address}
+          names:
+          - ${_param:ceph03_hostname}
+          - ${_param:ceph03_hostname}.${_param:cluster_domain}
+        ceph01:
+          address: ${_param:ceph01_address}
+          names:
+          - ${_param:ceph01_hostname}
+          - ${_param:ceph01_hostname}.${_param:cluster_domain}

@@ -1,0 +1,103 @@
+classes:
+- cluster.cloud
+- cluster.cloud.infra.host
+- cluster.cloud.infra.ceph_common
+- system.linux.system.single
+- system.openssh.server.team.all
+- cluster.cloud.infra.ssh
+- service.libvirt.server.kvm
+parameters:
+  linux:
+    storage:
+      enabled: true
+      lvm:
+        vg1:
+          enabled: true
+          devices:
+            - ${_param:large_ceph_disk}
+          volume:
+            journal-lv1:
+              size: 80G
+            journal-lv2:
+              size: 80G
+            journal-lv3:
+              size: 80G
+            journal-lv4:
+              size: 80G
+            journal-lv5:
+              size: 80G
+            journal-lv6:
+              size: 80G
+            journal-lv7:
+              size: 80G
+            wal-lv1:
+              size: 1G
+            wal-lv2:
+              size: 1G
+            wal-lv3:
+              size: 1G
+            wal-lv4:
+              size: 1G
+            wal-lv5:
+              size: 1G
+            wal-lv6:
+              size: 1G
+            wal-lv7:
+              size: 1G
+        vg2:
+          enabled: true
+          devices:
+            - /dev/sda
+          volume:
+            data-1:
+              size: 3T
+        vg3:
+          enabled: true
+          devices:
+            - /dev/sdb
+          volume:
+            data-1:
+              size: 3T
+        vg4:
+          enabled: true
+          devices:
+            - /dev/sdc
+          volume:
+            data-1:
+              size: 3T
+        vg5:
+          enabled: true
+          devices:
+            - /dev/sdd
+          volume:
+            data-1:
+              size: 3T
+        vg6:
+          enabled: true
+          devices:
+            - /dev/sde
+          volume:
+            data-1:
+              size: 3T
+        vg7:
+          enabled: true
+          devices:
+            - /dev/sdf
+          volume:
+            data-1:
+              size: 3T
+        vg8:
+          enabled: true
+          devices:
+            - /dev/sdg
+          volume:
+            data-1:
+              size: 3T
+        vg9:
+          enabled: true
+          devices:
+            - /dev/sdh
+          volume:
+            data-1:
+              size: 3T
+

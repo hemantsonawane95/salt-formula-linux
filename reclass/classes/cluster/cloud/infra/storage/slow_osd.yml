@@ -1,0 +1,148 @@
+classes:
+- cluster.cloud
+- cluster.cloud.infra.host
+- cluster.cloud.infra.ceph_common
+- system.linux.system.single
+- system.openssh.server.team.all
+- cluster.cloud.infra.ssh
+- service.libvirt.server.kvm
+parameters:
+  linux:
+    storage:
+      enabled: true
+      lvm:
+        vg1:
+          enabled: true
+          devices:
+            - /dev/sdb
+          volume:
+            journal-lv1:
+              size: 80G
+            journal-lv2:
+              size: 80G
+            journal-lv3:
+              size: 80G
+            journal-lv4:
+              size: 80G
+            journal-lv5:
+              size: 80G
+            wal-lv1:
+              size: 1G
+            wal-lv2:
+              size: 1G
+            wal-lv3:
+              size: 1G
+            wal-lv4:
+              size: 1G
+            wal-lv5:
+              size: 1G
+        vg2:
+          enabled: true
+          devices:
+            - /dev/sdc
+          volume:
+            journal-lv1:
+              size: 80G
+            journal-lv2:
+              size: 80G
+            journal-lv3:
+              size: 80G
+            journal-lv4:
+              size: 80G
+            journal-lv5:
+              size: 80G
+            wal-lv1:
+              size: 1G
+            wal-lv2:
+              size: 1G
+            wal-lv3:
+              size: 1G
+            wal-lv4:
+              size: 1G
+            wal-lv5:
+              size: 1G
+        vg3:
+          enabled: true
+          devices:
+            - /dev/sdd
+          volume:
+            data-1:
+              size: 5T
+        vg4:
+          enabled: true
+          devices:
+            - /dev/sde
+          volume:
+            data-1:
+              size: 5T
+        vg5:
+          enabled: true
+          devices:
+            - /dev/sdf
+          volume:
+            data-1:
+              size: 5T
+        vg6:
+          enabled: true
+          devices:
+            - /dev/sdg
+          volume:
+            data-1:
+              size: 5T
+        vg7:
+          enabled: true
+          devices:
+            - /dev/sdh
+          volume:
+            data-1:
+              size: 5T
+        vg8:
+          enabled: true
+          devices:
+            - /dev/sdi
+          volume:
+            data-1:
+              size: 5T
+        vg9:
+          enabled: true
+          devices:
+            - /dev/sdj
+          volume:
+            data-1:
+              size: 5T
+        vg10:
+          enabled: true
+          devices:
+            - /dev/sdk
+          volume:
+            data-1:
+              size: 5T
+        vg11:
+          enabled: true
+          devices:
+            - /dev/sdl
+          volume:
+            data-1:
+              size: 5T
+        vg12:
+          enabled: true
+          devices:
+            - /dev/sdm
+          volume:
+            data-1:
+              size: 5T
+    system:
+      apparmor:
+        enabled: false
+      user:
+        root:
+          enabled: true
+          name: root
+          home: /root
+          # hariseldon
+          password: $1$XfJPRPLN$VP/4i6FiQ9mr3HesQ35S00
+    network:
+      resolv:
+        dns:
+          - 8.8.4.4
+          - 8.8.8.8

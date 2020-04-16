@@ -1,0 +1,19 @@
+classes:
+- cluster.cloud.infra.compute.compute
+- cluster.cloud.infra.networking.compute
+parameters:
+  _param:
+    ceph_fast_address: 10.19.2.241
+    ceph_slow_address: 10.18.2.241
+    control_address: 10.12.2.241
+    linux_system_codename: bionic
+    primary_nic: enp59s0f2
+    secondary_nic: enp59s0f3
+    single_address: 10.11.2.241
+    test_address: 10.23.2.241
+  linux:
+    system:
+      name: acmp-s-01
+      domain: cloud.local
+      cluster: default
+      environment: prd

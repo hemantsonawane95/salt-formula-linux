@@ -1,0 +1,25 @@
+classes:
+- cluster.cloud.infra.storage.fast_osd
+- cluster.cloud.infra.networking.fast_ceph
+parameters:
+  _param:
+    ceph_address: 10.19.2.222
+    ceph_internal_address: 10.26.2.222
+    ceph_internal_vlan: 2516
+    ceph_netmask: 255.255.252.0
+    ceph_public_address: 10.19.2.222
+    ceph_public_netmask: 255.255.252.0
+    ceph_public_vlan: 2509
+    fourth_nic: enp175s0f3
+    large_ceph_disk: /dev/nvme2n1
+    linux_system_codename: bionic
+    primary_nic: enp175s0f0
+    secondary_nic: enp175s0f1
+    single_address: 10.11.2.222
+    third_nic: enp175s0f2
+  linux:
+    system:
+      name: a-nvme-ceph-02
+      domain: cloud.local
+      cluster: default
+      environment: prd

@@ -1,0 +1,24 @@
+classes:
+- cluster.cloud.infra.storage.slow_osd
+- cluster.cloud.infra.networking.slow_ceph
+parameters:
+  _param:
+    ceph_address: 10.25.0.202
+    ceph_internal_address: 10.25.0.202
+    ceph_internal_vlan: 2515
+    ceph_netmask: 255.255.252.0
+    ceph_public_address: 10.18.2.202
+    ceph_public_vlan: 2508
+    fourth_nic: ens3f1
+    linux_system_codename: bionic
+    mgmt_nic: enp5s0f0
+    primary_nic: ens5f0
+    secondary_nic: ens5f1
+    single_address: 10.11.2.202
+    third_nic: ens3f0
+  linux:
+    system:
+      name: ceph02
+      domain: cloud.local
+      cluster: default
+      environment: prd

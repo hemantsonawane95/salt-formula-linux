@@ -1,0 +1,529 @@
+classes:
+- service.git.client
+- system.linux.system.single
+- system.salt.master.pkg
+- system.reclass.storage.salt
+- system.salt.minion.ca.salt_master
+- system.openssh.server.team.all
+- cluster.cloud.infra.host
+- cluster.cloud
+parameters:
+  _param:
+    reclass_data_repository: git@gitlab.iot.tcpisek.cz:cloud-models/pisek-model.git
+    reclass_data_revision: master
+    reclass_config_master: ${_param:infra_config_address}
+    salt_master_host: 10.12.0.206
+    salt_master_base_environment: prd
+    salt_minion_ca_host: ${linux:network:fqdn}
+  reclass:
+    storage:
+      node:
+        ansible-ceph:
+          name: ${_param:ansible_ceph_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.ansible
+          params:
+            linux_system_codename: bionic
+            single_address: ${_param:ansible_ceph_ip}
+        fast-mon01:
+          name: ${_param:fast_mon01_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.mon
+          params:
+            linux_system_codename: bionic
+            single_address: ${_param:fast_mon01_address}
+            ceph_public_address: ${_param:fast_mon01_ceph_address}
+            network_netmask: 255.255.252.0
+        fast-mon02:
+          name: ${_param:fast_mon02_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.mon
+          params:
+            linux_system_codename: bionic
+            single_address: ${_param:fast_mon02_address}
+            ceph_public_address: ${_param:fast_mon02_ceph_address}
+            network_netmask: 255.255.252.0
+        fast-mon03:
+          name: ${_param:fast_mon03_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.mon
+          params:
+            linux_system_codename: bionic
+            single_address: ${_param:fast_mon03_address}
+            ceph_public_address: ${_param:fast_mon03_ceph_address}
+            network_netmask: 255.255.252.0
+        slow-mon01:
+          name: ${_param:slow_mon01_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.mon
+          params:
+            linux_system_codename: bionic
+            single_address: ${_param:slow_mon01_address}
+            ceph_public_address: ${_param:slow_mon01_ceph_address}
+            network_netmask: 255.255.252.0
+        slow-mon02:
+          name: ${_param:slow_mon02_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.mon
+          params:
+            linux_system_codename: bionic
+            single_address: ${_param:slow_mon02_address}
+            ceph_public_address: ${_param:slow_mon02_ceph_address}
+            network_netmask: 255.255.252.0
+        slow-mon03: 
+          name: ${_param:slow_mon03_hostname}
+          domain: ${_param:cluster_domain}
+          classes: 
+          - cluster.${_param:cluster_name}.infra.mon
+          params:
+            linux_system_codename: bionic
+            single_address: ${_param:slow_mon03_address}
+            ceph_public_address: ${_param:slow_mon03_ceph_address}
+            network_netmask: 255.255.252.0
+        ceph01:
+          name: ${_param:ceph01_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.storage.slow_osd
+          - cluster.${_param:cluster_name}.infra.networking.slow_ceph
+          params:
+            linux_system_codename: bionic
+            single_address: ${_param:ceph01_address}
+            ceph_public_vlan: ${_param:ceph_slow_vlan}
+            ceph_internal_vlan: 2515
+            ceph_address: ${_param:ceph01_ceph_internal_address}
+            ceph_netmask: ${_param:ceph_private_netmask}
+            ceph_internal_address: ${_param:ceph01_ceph_internal_address}
+            ceph_public_address: ${_param:ceph01_ceph_public_address}
+            primary_nic: ${_param:slow_ceph_primary_nic}
+            secondary_nic: ${_param:slow_ceph_secondary_nic}
+            third_nic: ${_param:slow_ceph_third_nic}
+            fourth_nic: ${_param:slow_ceph_fourth_nic}
+            mgmt_nic: ${_param:mgmt_ceph01}
+        ceph02:
+          name: ${_param:ceph02_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.storage.slow_osd
+          - cluster.${_param:cluster_name}.infra.networking.slow_ceph
+          params:
+            linux_system_codename: bionic
+            single_address: ${_param:ceph02_address}
+            ceph_public_vlan: ${_param:ceph_slow_vlan}
+            ceph_internal_vlan: 2515
+            ceph_address: ${_param:ceph02_ceph_internal_address}
+            ceph_netmask: ${_param:ceph_private_netmask}
+            ceph_internal_address: ${_param:ceph02_ceph_internal_address}
+            ceph_public_address: ${_param:ceph02_ceph_public_address}
+            primary_nic: ${_param:slow_ceph_primary_nic}
+            secondary_nic: ${_param:slow_ceph_secondary_nic}
+            third_nic: ${_param:slow_ceph_third_nic}
+            fourth_nic: ${_param:slow_ceph_fourth_nic}
+            mgmt_nic: ${_param:mgmt_ceph02}
+        ceph03:
+          name: ${_param:ceph03_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.storage.slow_osd
+          - cluster.${_param:cluster_name}.infra.networking.slow_ceph
+          params:
+            linux_system_codename: bionic
+            single_address: ${_param:ceph03_address}
+            ceph_public_vlan: ${_param:ceph_slow_vlan}
+            ceph_internal_vlan: 2515
+            ceph_address: ${_param:ceph03_ceph_internal_address}
+            ceph_netmask: ${_param:ceph_private_netmask}
+            ceph_internal_address: ${_param:ceph03_ceph_internal_address}
+            ceph_public_address: ${_param:ceph03_ceph_public_address}
+            primary_nic: ${_param:slow_ceph_primary_nic}
+            secondary_nic: ${_param:slow_ceph_secondary_nic}
+            third_nic: ${_param:slow_ceph_third_nic}
+            fourth_nic: ${_param:slow_ceph_fourth_nic}
+            mgmt_nic: ${_param:mgmt_ceph03}
+        ceph04:
+          name: ${_param:ceph04_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.storage.slow_osd
+          - cluster.${_param:cluster_name}.infra.networking.slow_ceph
+          params:
+            linux_system_codename: bionic
+            single_address: ${_param:ceph04_address}
+            ceph_public_vlan: ${_param:ceph_slow_vlan}
+            ceph_internal_vlan: 2515
+            ceph_address: ${_param:ceph04_ceph_internal_address}
+            ceph_netmask: ${_param:ceph_private_netmask}
+            ceph_internal_address: ${_param:ceph04_ceph_internal_address}
+            ceph_public_address: ${_param:ceph04_ceph_public_address}
+            primary_nic: ${_param:slow_ceph_primary_nic}
+            secondary_nic: ${_param:slow_ceph_secondary_nic}
+            third_nic: ${_param:slow_ceph_third_nic}
+            fourth_nic: ${_param:slow_ceph_fourth_nic}
+            mgmt_nic: ${_param:mgmt_ceph04}
+        a-nvme-ceph-01:
+          name: ${_param:a-nvme-ceph-01_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.storage.fast_osd
+          - cluster.${_param:cluster_name}.infra.networking.fast_ceph
+          params:
+            linux_system_codename: bionic
+            single_address: ${_param:a-nvme-ceph-01_address}
+            ceph_public_vlan: ${_param:ceph_fast_vlan}
+            ceph_internal_vlan: 2516
+            ceph_address: ${_param:a-nvme-ceph-01_ceph_public_address}
+            ceph_netmask: ${_param:ceph_public_netmask}
+            ceph_internal_address: ${_param:a-nvme-ceph-01_ceph_internal_address}
+            ceph_public_address: ${_param:a-nvme-ceph-01_ceph_public_address}
+            primary_nic: ${_param:fast_ceph_primary_nic}
+            secondary_nic: ${_param:fast_ceph_secondary_nic}
+            third_nic: ${_param:fast_ceph_third_nic}
+            fourth_nic: ${_param:fast_ceph_fourth_nic}
+            large_ceph_disk: /dev/nvme2n1
+        a-nvme-ceph-02:
+          name: ${_param:a-nvme-ceph-02_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.storage.fast_osd
+          - cluster.${_param:cluster_name}.infra.networking.fast_ceph
+          params:
+            linux_system_codename: bionic
+            single_address: ${_param:a-nvme-ceph-02_address}
+            ceph_public_vlan: ${_param:ceph_fast_vlan}
+            ceph_internal_vlan: 2516
+            ceph_address: ${_param:a-nvme-ceph-02_ceph_public_address}
+            ceph_netmask: ${_param:ceph_public_netmask}
+            ceph_public_netmask: ${_param:ceph_public_netmask}
+            ceph_internal_address: ${_param:a-nvme-ceph-02_ceph_internal_address}
+            ceph_public_address: ${_param:a-nvme-ceph-02_ceph_public_address}
+            primary_nic: ${_param:fast_ceph_primary_nic}
+            secondary_nic: ${_param:fast_ceph_secondary_nic}
+            third_nic: ${_param:fast_ceph_third_nic}
+            fourth_nic: ${_param:fast_ceph_fourth_nic}
+            large_ceph_disk: /dev/nvme2n1
+        a-nvme-ceph-03:
+          name: ${_param:a-nvme-ceph-03_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.storage.fast_osd
+          - cluster.${_param:cluster_name}.infra.networking.fast_ceph
+          params:
+            linux_system_codename: bionic
+            single_address: ${_param:a-nvme-ceph-03_address}
+            ceph_public_vlan: ${_param:ceph_fast_vlan}
+            ceph_internal_vlan: 2516
+            ceph_address: ${_param:a-nvme-ceph-03_ceph_public_address}
+            ceph_netmask: ${_param:ceph_public_netmask}
+            ceph_public_netmask: ${_param:ceph_public_netmask}
+            ceph_internal_address: ${_param:a-nvme-ceph-03_ceph_internal_address}
+            ceph_public_address: ${_param:a-nvme-ceph-03_ceph_public_address}
+            primary_nic: ${_param:fast_ceph_primary_nic}
+            secondary_nic: ${_param:fast_ceph_secondary_nic}
+            third_nic: ${_param:fast_ceph_third_nic}
+            fourth_nic: ${_param:fast_ceph_fourth_nic}
+            large_ceph_disk: /dev/nvme2n1
+        a-nvme-ceph-04:
+          name: ${_param:a-nvme-ceph-04_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.storage.fast_osd
+          - cluster.${_param:cluster_name}.infra.networking.fast_ceph
+          params:
+            linux_system_codename: bionic
+            single_address: ${_param:a-nvme-ceph-04_address}
+            ceph_public_vlan: ${_param:ceph_fast_vlan}
+            ceph_internal_vlan: 2516
+            ceph_address: ${_param:a-nvme-ceph-04_ceph_public_address}
+            ceph_netmask: ${_param:ceph_public_netmask}
+            ceph_public_netmask: ${_param:ceph_public_netmask}
+            ceph_internal_address: ${_param:a-nvme-ceph-04_ceph_internal_address}
+            ceph_public_address: ${_param:a-nvme-ceph-04_ceph_public_address}
+            primary_nic: ${_param:fast_ceph_primary_nic}
+            secondary_nic: ${_param:fast_ceph_secondary_nic}
+            third_nic: ${_param:fast_ceph_third_nic}
+            fourth_nic: ${_param:fast_ceph_fourth_nic}
+            large_ceph_disk: /dev/nvme2n1
+        a-nvme-ceph-05:
+          name: ${_param:a-nvme-ceph-05_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.storage.fast_osd
+          - cluster.${_param:cluster_name}.infra.networking.fast_ceph
+          params:
+            linux_system_codename: bionic
+            single_address: ${_param:a-nvme-ceph-05_address}
+            ceph_public_vlan: ${_param:ceph_fast_vlan}
+            ceph_internal_vlan: 2516
+            ceph_address: ${_param:a-nvme-ceph-05_ceph_public_address}
+            ceph_netmask: ${_param:ceph_public_netmask}
+            ceph_public_netmask: ${_param:ceph_public_netmask}
+            ceph_internal_address: ${_param:a-nvme-ceph-05_ceph_internal_address}
+            ceph_public_address: ${_param:a-nvme-ceph-05_ceph_public_address}
+            primary_nic: ${_param:fast_ceph_primary_nic}
+            secondary_nic: ${_param:fast_ceph_secondary_nic}
+            third_nic: ${_param:fast_ceph_third_nic}
+            fourth_nic: ${_param:fast_ceph_fourth_nic}
+            large_ceph_disk: /dev/nvme0n1
+###
+        apod03nod03:
+          name: ${_param:apod03nod03_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          - cluster.${_param:cluster_name}.infra.networking.compute
+          params:
+            linux_system_codename: xenial
+            primary_nic: eno1
+            secondary_nic: eno2
+            single_address: ${_param:apod03nod03_address}
+            control_address: ${_param:apod03nod03_control_address}
+            ceph_slow_address: ${_param:apod03nod03_ceph_internal_address}
+            ceph_fast_address: ${_param:apod03nod03_ceph_public_address}
+            test_address: ${_param:apod03nod03_test_address}
+        apod03nod04:
+          name: ${_param:apod03nod04_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          - cluster.${_param:cluster_name}.infra.networking.compute
+          params:
+            linux_system_codename: xenial
+            primary_nic: eno1
+            secondary_nic: eno2
+            single_address: ${_param:apod03nod04_address}
+            control_address: ${_param:apod03nod04_control_address}
+            ceph_slow_address: ${_param:apod03nod04_ceph_internal_address}
+            ceph_fast_address: ${_param:apod03nod04_ceph_public_address}
+            test_address: ${_param:apod03nod04_test_address}
+        apod03nod05:
+          name: ${_param:apod03nod05_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          - cluster.${_param:cluster_name}.infra.networking.compute
+          params:
+            linux_system_codename: xenial
+            primary_nic: eno1
+            secondary_nic: eno2
+            single_address: ${_param:apod03nod05_address}
+            control_address: ${_param:apod03nod05_control_address}
+            ceph_slow_address: ${_param:apod03nod05_ceph_internal_address}
+            ceph_fast_address: ${_param:apod03nod05_ceph_public_address}
+            test_address: ${_param:apod03nod05_test_address}
+        apod03nod06:
+          name: ${_param:apod03nod06_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          - cluster.${_param:cluster_name}.infra.networking.compute
+          params:
+            linux_system_codename: xenial
+            primary_nic: eno1
+            secondary_nic: eno2
+            single_address: ${_param:apod03nod06_address}
+            control_address: ${_param:apod03nod06_control_address}
+            ceph_slow_address: ${_param:apod03nod06_ceph_internal_address}
+            ceph_fast_address: ${_param:apod03nod06_ceph_public_address}
+            test_address: ${_param:apod03nod06_test_address}
+        apod03nod07:
+          name: ${_param:apod03nod07_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          - cluster.${_param:cluster_name}.infra.networking.compute
+          params:
+            linux_system_codename: xenial
+            primary_nic: eno1
+            secondary_nic: eno2
+            single_address: ${_param:apod03nod07_address}
+            control_address: ${_param:apod03nod07_control_address}
+            ceph_slow_address: ${_param:apod03nod07_ceph_internal_address}
+            ceph_fast_address: ${_param:apod03nod07_ceph_public_address}
+            test_address: ${_param:apod03nod07_test_address}
+        apod03nod08:
+          name: ${_param:apod03nod08_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          - cluster.${_param:cluster_name}.infra.networking.compute
+          params:
+            linux_system_codename: xenial
+            primary_nic: eno1
+            secondary_nic: eno2
+            single_address: ${_param:apod03nod08_address}
+            control_address: ${_param:apod03nod08_control_address}
+            ceph_slow_address: ${_param:apod03nod08_ceph_internal_address}
+            ceph_fast_address: ${_param:apod03nod08_ceph_public_address}
+            test_address: ${_param:apod03nod08_test_address}
+        apod03nod09:
+          name: ${_param:apod03nod09_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          - cluster.${_param:cluster_name}.infra.networking.compute
+          params:
+            linux_system_codename: xenial
+            primary_nic: eno1
+            secondary_nic: eno2
+            single_address: ${_param:apod03nod09_address}
+            control_address: ${_param:apod03nod09_control_address}
+            ceph_slow_address: ${_param:apod03nod09_ceph_internal_address}
+            ceph_fast_address: ${_param:apod03nod09_ceph_public_address}
+            test_address: ${_param:apod03nod09_test_address}
+###
+        apod03nod10:
+          name: ${_param:apod03nod10_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          - cluster.${_param:cluster_name}.infra.networking.compute
+          params:
+            linux_system_codename: xenial
+            primary_nic: eno1
+            secondary_nic: eno2
+            single_address: ${_param:apod03nod10_address}
+            control_address: ${_param:apod03nod10_control_address}
+            ceph_slow_address: ${_param:apod03nod10_ceph_internal_address}
+            ceph_fast_address: ${_param:apod03nod10_ceph_public_address}
+            test_address: ${_param:apod03nod10_test_address}
+        apod03nod11:
+          name: ${_param:apod03nod11_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          - cluster.${_param:cluster_name}.infra.networking.compute
+          params:
+            linux_system_codename: xenial
+            primary_nic: eno1
+            secondary_nic: eno2
+            single_address: ${_param:apod03nod11_address}
+            control_address: ${_param:apod03nod11_control_address}
+            ceph_slow_address: ${_param:apod03nod11_ceph_internal_address}
+            ceph_fast_address: ${_param:apod03nod11_ceph_public_address}
+            test_address: ${_param:apod03nod11_test_address}
+        apod03nod12:
+          name: ${_param:apod03nod12_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          - cluster.${_param:cluster_name}.infra.networking.compute
+          params:
+            linux_system_codename: xenial
+            primary_nic: eno1
+            secondary_nic: eno2
+            single_address: ${_param:apod03nod12_address}
+            control_address: ${_param:apod03nod12_control_address}
+            ceph_slow_address: ${_param:apod03nod12_ceph_internal_address}
+            ceph_fast_address: ${_param:apod03nod12_ceph_public_address}
+            test_address: ${_param:apod03nod12_test_address}
+        apod03nod13:
+          name: ${_param:apod03nod13_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          - cluster.${_param:cluster_name}.infra.networking.compute
+          params:
+            linux_system_codename: xenial
+            primary_nic: eno1
+            secondary_nic: eno2
+            single_address: ${_param:apod03nod13_address}
+            control_address: ${_param:apod03nod13_control_address}
+            ceph_slow_address: ${_param:apod03nod13_ceph_internal_address}
+            ceph_fast_address: ${_param:apod03nod13_ceph_public_address}
+            test_address: ${_param:apod03nod13_test_address}
+        apod03nod14:
+          name: ${_param:apod03nod14_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          - cluster.${_param:cluster_name}.infra.networking.compute
+          params:
+            linux_system_codename: xenial
+            primary_nic: eno1
+            secondary_nic: eno2
+            single_address: ${_param:apod03nod14_address}
+            control_address: ${_param:apod03nod14_control_address}
+            ceph_slow_address: ${_param:apod03nod14_ceph_internal_address}
+            ceph_fast_address: ${_param:apod03nod14_ceph_public_address}
+            test_address: ${_param:apod03nod14_test_address}
+        acmp-s-01:
+          name: ${_param:acmp-s-01_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          - cluster.${_param:cluster_name}.infra.networking.compute
+          params:
+            linux_system_codename: bionic
+            primary_nic: enp59s0f2
+            secondary_nic: enp59s0f3
+            single_address: ${_param:acmp-s-01_address}
+            control_address: ${_param:acmp-s-01_control_address}
+            ceph_slow_address: ${_param:acmp-s-01_ceph_internal_address}
+            ceph_fast_address: ${_param:acmp-s-01_ceph_public_address}
+            test_address: ${_param:acmp-s-01_test_address}
+        acmp-s-02:
+          name: ${_param:acmp-s-02_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          - cluster.${_param:cluster_name}.infra.networking.compute
+          params:
+            linux_system_codename: bionic
+            primary_nic: enp59s0f2
+            secondary_nic: enp59s0f3
+            single_address: ${_param:acmp-s-02_address}
+            control_address: ${_param:acmp-s-02_control_address}
+            ceph_slow_address: ${_param:acmp-s-02_ceph_internal_address}
+            ceph_fast_address: ${_param:acmp-s-02_ceph_public_address}
+            test_address: ${_param:acmp-s-02_test_address}
+        acmp-s-03:
+          name: ${_param:acmp-s-03_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          - cluster.${_param:cluster_name}.infra.networking.compute
+          params:
+            linux_system_codename: bionic
+            primary_nic: enp59s0f2
+            secondary_nic: enp59s0f3
+            single_address: ${_param:acmp-s-03_address}
+            control_address: ${_param:acmp-s-03_control_address}
+            ceph_slow_address: ${_param:acmp-s-03_ceph_internal_address}
+            ceph_fast_address: ${_param:acmp-s-03_ceph_public_address}
+            test_address: ${_param:acmp-s-03_test_address}
+        acmp-s-04:
+          name: ${_param:acmp-s-04_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          - cluster.${_param:cluster_name}.infra.networking.compute
+          params:
+            linux_system_codename: bionic
+            primary_nic: enp59s0f2
+            secondary_nic: enp59s0f3
+            single_address: ${_param:acmp-s-04_address}
+            control_address: ${_param:acmp-s-04_control_address}
+            ceph_slow_address: ${_param:acmp-s-04_ceph_internal_address}
+            ceph_fast_address: ${_param:acmp-s-04_ceph_public_address}
+            test_address: ${_param:acmp-s-04_test_address}
+        #acmp-s-05:
+        #  name: ${_param:acmp-s-01_hostname}
+        #  domain: ${_param:cluster_domain}
+        #  classes:
+        #  - cluster.${_param:cluster_name}.infra.compute.compute
+        #  - cluster.${_param:cluster_name}.infra.networking.compute
+        #  params:
+        #    linux_system_codename: bionic
+        #    primary_nic: enp59s0f2
+        #    secondary_nic: enp59s0f3
+        #    single_address: ${_param:acmp-s-05_address}
+        #    control_address: ${_param:acmp-s-05_control_address}
+        #    ceph_slow_address: ${_param:acmp-s-05_ceph_internal_address}
+        #    ceph_fast_address: ${_param:acmp-s-05_ceph_public_address}
+        #    test_address: ${_param:acmp-s-05_test_address}

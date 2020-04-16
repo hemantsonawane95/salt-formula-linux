@@ -1,0 +1,20 @@
+parameters:
+  linux:
+    system:
+      user:
+        chnyda:
+          enabled: true
+          name: chnyda
+          sudo: true
+          full_name: Cedric Hnyda
+          home: /home/chnyda
+          email: ced.hnyda@gmail.com
+  openssh:
+    server:
+      enabled: true
+      user:
+        chnyda:
+          enabled: true
+          public_keys:
+            - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDEwRjybjADhZbZbuJi6v7EV7FaoIwoq0VpJlI4wm3gvMIt6RHMJAzEhDtL6ehBm+dRXDd/a10HBKSf14C1qn7g2u63GEvBC3IRyLTr9FBug1XZPn3+/CoefIGtTMw5bcdyie96fw4HIYyxRF2AcN2y8dAEhWMN5SsXjsXN6b3aq5eeaZei1nG6wLcul153YlLbRxcVIbbaZ4CKFZIdzTME+u/ePaqmSIjMCJk9jnJ7XOyCPx6ChZN/4Sg/yxxi5Z6Q1UnPwtItJ8hSc4nEEMe38jpWRtSt7SUSMQS+OqDG7OGEIONN8yJZIxbs8Z7aAA22qBRYSzw/bnhbB37D1w8cCluVVIR3xaC4o/8kUxEmmjGp6xDzFx/t5F9HxWq/AeCn4L/I6pq/qVR0lvvnWbeWeKFK+b6M6C4aCqHrC5oDcjoe82bBVGl9u1/Aw3pWVf/H5mu1zlAdxbGx6JYay+dcx0CAcWu/UZQi4v46I3sy9PTIWTdhpb4kB6abtZtRQz6gqt8J/SRxOErSHxNQcuns6Y7jh3b++1OToFIuk2Y98NX//djYfTqiRW22QBEXQMyy8E6uSluOJNDteeVFOYJxM1A+OWfXqB/5Xz0lfe6WFhygSd2pQhBfSNUezsx9Ya26FTq4/T0OXL4UW6uHSIWniipbfj4B2jit7JkSnJxbVw== ced.hnyda@gmail.com
+          user: ${linux:system:user:chnyda}

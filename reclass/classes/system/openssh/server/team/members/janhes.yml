@@ -1,0 +1,20 @@
+parameters:
+  linux:
+    system:
+      user:
+        janhes:
+          enabled: true
+          name: janhes
+          sudo: true
+          full_name: Jan Hes
+          home: /home/janhes
+          email: jan.hes@tcpisek.cz
+  openssh:
+    server:
+      enabled: true
+      user:
+        janhes:
+          enabled: true
+          public_keys:
+            - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDczulKwA+iU+toPiy7903IP0p7S7KUiTOW1hPBUO98IS2Mnohn+w6ChoQwgzv5QPYo4cXFpXCXlkzNBshQVkWks/1h3ORtEHQZvs7t22XzsOfGTAwea5IFXqP3o8vgKviGHy0/QBbkHw5ZQnrowL/lUBa9V9z7UKMkqNq71KVERyZjOn22Cx5Oc/AhuZ5qzE/mtnEFdeL6foy60ds6uZcjxooSmRQqhjgtRvayRAnYsmQIOOsKlxbl4sq5ffg5jqg4Q1T633B9T2ek3j189pd6J3tAlTo2X+4Ri3tOT9DJoIsS1bG8ma6vPyPUDXoXLRHJBdnJ/sgXl3q57faqe12J hesjan@webserver
+          user: ${linux:system:user:janhes}

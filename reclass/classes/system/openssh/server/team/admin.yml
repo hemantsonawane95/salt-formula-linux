@@ -1,0 +1,7 @@
+classes:
+- system.openssh.server.team.members.adam
+- system.openssh.server.team.members.chnyda
+parameters:
+  openssh:
+    server:
+      enabled: true

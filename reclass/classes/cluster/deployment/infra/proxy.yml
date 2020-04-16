@@ -1,0 +1,28 @@
+parameters:
+  haproxy:
+    proxy:
+      enabled: True
+      mode: http/tcp
+      logging: syslog
+      maxconn: 1024
+      timeout:
+        connect: 5000
+        client: 50000
+        server: 50000
+      listen:
+        http-in:
+          binds:
+          - address: 0.0.0.0
+            port: 31000
+          servers:
+          - name: server1
+            host: 10.19.0.27
+            port: 31000
+        https-in:
+          binds:
+          - address: 0.0.0.0
+            port: 30680
+          servers:
+          - name: server1
+            host: 10.19.0.27
+            port: 30680

@@ -1,0 +1,48 @@
+parameters:
+  _param:
+    ntp_strata_host1: 172.16.138.20
+    cluster_domain: maas
+    cluster_name: cloud
+    infra_config_hostname: master
+    infra_config_address: 10.12.0.210
+    salt_master_host: 10.12.0.210
+    master_hostname: master
+    master_address: 10.12.0.210
+
+    ceph01_address: 10.11.2.201
+    ceph01_hostname: ceph01
+    ceph02_address: 10.11.2.202
+    ceph02_hostname: ceph02
+    ceph03_address: 10.11.2.203
+    ceph03_hostname: ceph03
+    ceph04_address: 10.11.2.204
+    ceph04_hostname: ceph04
+    
+    cephvm01_address: 10.12.2.231
+    cephvm01_hostname: cephvm01
+    cephvm01_public: 10.19.2.231
+    cephvm01_internal: 10.18.2.231
+    cephvm02_address: 10.12.2.232
+    cephvm02_hostname: cephvm02
+    cephvm02_public: 10.19.2.232
+    cephvm02_internal: 10.18.2.232
+    cephvm03_address: 10.12.2.233
+    cephvm03_hostname: cephvm03
+    cephvm03_public: 10.19.2.233
+    cephvm03_internal: 10.18.2.233
+
+## 
+    apod03nod03_address: 10.11.2.103
+    apod03nod03_hostname: apod03nod03
+    apod03nod04_address: 10.11.2.104
+    apod03nod04_hostname: apod03nod04
+    apod03nod05_address: 10.11.2.105
+    apod03nod05_hostname: apod03nod05
+    apod03nod06_address: 10.11.2.106
+    apod03nod06_hostname: apod03nod06
+    apod03nod07_address: 10.11.2.107
+    apod03nod07_hostname: apod03nod07
+    apod03nod08_address: 10.11.2.108
+    apod03nod08_hostname: apod03nod08
+    apod03nod09_address: 10.11.2.109
+    apod03nod09_hostname: apod03nod09

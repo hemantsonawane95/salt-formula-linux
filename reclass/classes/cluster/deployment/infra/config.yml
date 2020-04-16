@@ -1,0 +1,141 @@
+classes:
+- service.git.client
+- system.linux.system.single
+- system.salt.master.pkg
+- system.reclass.storage.salt
+- system.salt.minion.ca.salt_master
+- system.openssh.server.team.all
+- cluster.deployment.infra.host
+- cluster.deployment
+parameters:
+  _param:
+    reclass_data_repository: git@gitlab.iot.tcpisek.cz:cloud-models/pisek-model.git
+    reclass_data_revision: master
+    reclass_config_master: ${_param:infra_config_address}
+    salt_master_host: 10.12.0.210
+    salt_master_base_environment: prd
+    salt_minion_ca_host: ${linux:network:fqdn}
+  reclass:
+    storage:
+      node:
+#        ceph01:
+#          name: ${_param:ceph01_hostname}
+#          domain: ${_param:cluster_domain}
+#          classes:
+#          - cluster.${_param:cluster_name}.infra.osd
+#          - cluster.${_param:cluster_name}.infra.proxy
+#          params:
+#            linux_system_codename: bionic
+#            single_address: ${_param:ceph01_address}
+#        ceph04:
+#          name: ${_param:ceph04_hostname}
+#          domain: ${_param:cluster_domain}
+#          classes:
+#          - cluster.${_param:cluster_name}.infra.osd
+#          params:
+#            linux_system_codename: bionic
+#            single_address: ${_param:ceph04_address}
+#        ceph02:
+#          name: ${_param:ceph02_hostname}
+#          domain: ${_param:cluster_domain}
+#          classes:
+#          - cluster.${_param:cluster_name}.infra.osd
+#          params:
+#            linux_system_codename: bionic
+#            single_address: ${_param:ceph02_address}
+#        ceph03:
+#          name: ${_param:ceph03_hostname}
+#          domain: ${_param:cluster_domain}
+#          classes:
+#          - cluster.${_param:cluster_name}.infra.osd
+#          params:
+#            linux_system_codename: bionic
+#            single_address: ${_param:ceph03_address}
+#        cephvm01:
+#          name: ${_param:cephvm01_hostname}
+#          domain: ${_param:cluster_domain}
+#          classes:
+#          - cluster.${_param:cluster_name}.infra.vm
+#          params:
+#            linux_system_codename: xenial
+#            single_address: ${_param:cephvm01_address}
+#            public_address: ${_param:cephvm01_public}
+#            internal_address: ${_param:cephvm01_internal}
+#        cephvm02:
+#          name: ${_param:cephvm02_hostname}
+#          domain: ${_param:cluster_domain}
+#          classes:
+#          - cluster.${_param:cluster_name}.infra.vm
+#          params:
+#            linux_system_codename: xenial
+#            single_address: ${_param:cephvm02_address}
+#            public_address: ${_param:cephvm02_public}
+#            internal_address: ${_param:cephvm02_internal}
+#        cephvm03:
+#          name: ${_param:cephvm03_hostname}
+#          domain: ${_param:cluster_domain}
+#          classes:
+#          - cluster.${_param:cluster_name}.infra.vm
+#          params:
+#            linux_system_codename: xenial
+#            single_address: ${_param:cephvm03_address}
+#            public_address: ${_param:cephvm03_public}
+#            internal_address: ${_param:cephvm03_internal}
+####
+        apod03nod08:
+          name: ${_param:apod03nod08_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          params:
+            linux_system_codename: xenial
+            single_address: ${_param:apod03nod08_address}
+        apod03nod09:
+          name: ${_param:apod03nod09_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          params:
+            linux_system_codename: xenial
+            single_address: ${_param:apod03nod09_address}
+        apod03nod03:
+          name: ${_param:apod03nod03_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          params:
+            linux_system_codename: xenial
+            single_address: ${_param:apod03nod03_address}
+        apod03nod04:
+          name: ${_param:apod03nod04_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          params:
+            linux_system_codename: xenial
+            single_address: ${_param:apod03nod04_address}
+        apod03nod05:
+          name: ${_param:apod03nod05_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          params:
+            linux_system_codename: xenial
+            single_address: ${_param:apod03nod05_address}
+        apod03nod06:
+          name: ${_param:apod03nod06_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          params:
+            linux_system_codename: xenial
+            single_address: ${_param:apod03nod06_address}
+        apod03nod07:
+          name: ${_param:apod03nod07_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.compute.compute
+          params:
+            linux_system_codename: xenial
+            single_address: ${_param:apod03nod07_address}
+

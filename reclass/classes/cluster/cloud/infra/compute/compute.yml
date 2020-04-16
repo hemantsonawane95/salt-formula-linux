@@ -1,0 +1,126 @@
+classes:
+- cluster.cloud
+- cluster.cloud.infra.host
+- system.linux.system.single
+#- system.linux.system.sriov
+- system.openssh.server.team.all
+- cluster.cloud.infra.ssh
+parameters:
+  linux:
+#    network:
+#      interfaces:
+#      eth0:
+#        enabled: true
+#        type: eth
+#        address: ${_param:single_address}
+#        netmask: 255.255.252.0
+#        gateway: 10.11.0.1
+#        name_servers:
+#        - 8.8.8.8
+#        - 8.8.4.4
+#        mtu: 1500
+    network:
+      resolv:
+        dns:
+        - 10.233.0.3
+        - 8.8.4.4
+        - 8.8.8.8
+    system:
+      repo:
+        ubuntu:
+          source: "deb http://packages.itera.io/ubuntu ${_param:linux_system_codename} main restricted universe multiverse"
+          architectures: amd64
+          default: true
+        ubuntu-updates:
+          source: "deb http://packages.itera.io/ubuntu ${_param:linux_system_codename}-updates main restricted universe multiverse"
+          architectures: amd64
+          default: true
+        ubuntu-backports:
+          source: "deb http://packages.itera.io/ubuntu ${_param:linux_system_codename}-backports main restricted universe multiverse"
+          architectures: amd64
+          default: true
+        ubuntu-security:
+          source: "deb http://packages.itera.io/ubuntu-security ${_param:linux_system_codename}-security main restricted universe multiverse"
+          architectures: amd64
+          default: true
+      file:
+        /etc/docker/daemon.json:
+          contents: |
+            {
+              "bip": "192.168.63.1/24",
+              "live-restore": true
+            }
+      package:
+        ebtables:
+          version: latest
+        ceph-common:
+          version: latest
+        ceph-fs-common:
+          version: latest
+        #libvirt-bin:
+        #  version: latest 
+      kernel:
+        boot_options:
+        - hugepagesz=2M
+        - hugepages=102400
+        - default_hugepagesz=2M
+        - transparent_hugepage=never
+        sriov: True
+        module:
+          kvm-intel:
+            option:
+              nested: y
+#
+        #transparent_hugepage: never
+        elevator: deadline
+        #isolcpu: 12,13,14,15,16,17
+        isolcpu: 12,13,14,15,16,17
+#        hugepages:
+#          small:
+#            size: 102400M
+#            count: 102400
+#            mount_point: /dev/hugepages/
+#            mount: true
+
+        sysctl:
+#          net.bridge.bridge-nf-call-iptables: 1
+          net.ipv4.ip_forward: 1
+          net.ipv4.tcp_mtu_probing: 2
+          net.ipv4.conf.default.rp_filter: 0
+          net.ipv4.conf.all.rp_filter: 0
+      rc:
+        local: |
+          #!/bin/sh -e
+          echo 20 > /sys/class/net/eno1/device/sriov_numvfs;
+          echo 20 > /sys/class/net/eno2/device/sriov_numvfs;
+          l=$(ip a | grep enp | awk '{print $2;}' |  tr -d :)
+          echo $l
+          for elt in $l ; do
+            ip link set dev $elt mtu 9000
+          done
+          echo "tmp" > /tmp/coco
+          exit 0
+      apparmor:
+        enabled: false
+      user:
+        root:
+          enabled: true
+          name: root
+          home: /root
+          # hariseldon
+          password: $1$XfJPRPLN$VP/4i6FiQ9mr3HesQ35S00
+        deploy:
+          enabled: true
+          name: deploy
+          home: /home/deploy
+          full_name: Deploy user
+          email: deploy.user@itera.io
+  openssh:
+    server:
+      enabled: true
+      user:
+        root:
+          enabled: true
+          public_keys:
+            - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDXSpMzEz03jYRAxgK5IIzJiHu8WAISSt/WL8meBg6GNKP0cMq45y3XsUUgmbl/7ZWTERxHyrn2g29C+Rd/73IsEZ1qlNZmJR5GAGb9C0BN4kUnlXdtYz0YV5mWeJ+7tlx0alNjK1YykOQPCSopP35ftmqa8f557FBleI0HzpnmFzFzjRLfDkt0VG4ZAgRkztE5xG2hdrceWJmYCPwaMb+JM742w44i6+9myZdVrvIjNZUqO0mi1hsSrfFpi4AgUTjDxWC7pzKDtTtjmY3OcFSjBwb4UjsJdJ/CX3H18LcGcOl3IMZ3uv6oLMhB3huR2fBwxvT4+qP/cRc4qd+FLf4v
+          user: ${linux:system:user:deploy}

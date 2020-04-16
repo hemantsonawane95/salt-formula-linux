@@ -1,0 +1,43 @@
+classes:
+- system.docker
+parameters:
+  _param:
+    docker_image_gitlab: gitlab/gitlab-ce:latest
+    gitlab_port_registry: 5000
+    gitlab_smtp_hostname: localhost
+    gitlab_smtp_port: 25
+    gitlab_smtp_username: gitlab
+    gitlab_smtp_password: gitlab
+    gitlab_smtp_domain: localhost
+    gitlab_smtp_auth: login
+    gitlab_smtp_starttls_auto: "true"
+    gitlab_smtp_tls: "true"
+
+    # Default gitlab config
+    gitlab_config_default: external_url "${_param:gitlab_external_url}"; nginx["redirect_http_to_https"] = true;
+    gitlab_registry_default: registry_nginx["enable"] = true; registry_external_url "${_param:gitlab_external_url}:${_param:gitlab_port_registry}"; registry_nginx["listen_port"] = 4567;
+    gitlab_config_ssl: nginx["ssl_certificate"] = "${_param:gitlab_ssl_cert_path}"; nginx["ssl_certificate_key"] = "${_param:gitlab_ssl_key_path}";
+    gitlab_registry_config_ssl: registry_nginx["ssl_certificate"] = "${_param:gitlab_ssl_cert_path}"; registry_nginx["ssl_certificate_key"] = "${_param:gitlab_ssl_key_path}";
+  docker:
+    client:
+      stack:
+        gitlab:
+          service:
+            master:
+              image: ${_param:docker_image_gitlab}
+              environment:
+                GITLAB_OMNIBUS_CONFIG: ${_param:gitlab_config_default} ${_param:gitlab_registry_default} ${_param:gitlab_config_ssl} ${_param:gitlab_registry_config_ssl}
+              deploy:
+                restart_policy:
+                  condition: any
+              ports:
+                - "${_param:gitlab_port_http}:80"
+                - "${_param:gitlab_port_https}:443"
+                - "${_param:gitlab_port_ssh}:22"
+                - "${_param:gitlab_port_registry}:4567"
+              volumes:
+                - /srv/volumes/gitlab/config:/etc/gitlab
+                - /srv/volumes/gitlab/data:/var/opt/gitlab
+                - /srv/volumes/gitlab/logs:/var/log/gitlab
+                - /etc/ssl/cloudcerts/:/etc/gitlab_certs
+

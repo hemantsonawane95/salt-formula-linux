@@ -1,0 +1,24 @@
+parameters:
+  linux:
+    network:
+      host:
+        ceph04:
+          address: ${_param:ceph04_address}
+          names:
+          - ${_param:ceph04_hostname}
+          - ${_param:ceph04_hostname}.${_param:cluster_domain}
+        ceph02:
+          address: ${_param:ceph02_address}
+          names:
+          - ${_param:ceph02_hostname}
+          - ${_param:ceph02_hostname}.${_param:cluster_domain}
+        ceph03:
+          address: ${_param:ceph03_address}
+          names:
+          - ${_param:ceph03_hostname}
+          - ${_param:ceph03_hostname}.${_param:cluster_domain}
+        ceph01:
+          address: ${_param:ceph01_address}
+          names:
+          - ${_param:ceph01_hostname}
+          - ${_param:ceph01_hostname}.${_param:cluster_domain}

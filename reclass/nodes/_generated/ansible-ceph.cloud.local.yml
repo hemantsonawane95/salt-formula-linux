@@ -1,0 +1,12 @@
+classes:
+- cluster.cloud.infra.ansible
+parameters:
+  _param:
+    linux_system_codename: bionic
+    single_address: 10.12.0.205
+  linux:
+    system:
+      name: ansible-ceph
+      domain: cloud.local
+      cluster: default
+      environment: prd

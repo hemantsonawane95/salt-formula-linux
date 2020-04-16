@@ -1,0 +1,20 @@
+parameters:
+  linux:
+    system:
+      user:
+        pawan:
+          enabled: true
+          name: pawan
+          sudo: true
+          full_name: Hemant Sonawane
+          home: /home/pawan
+          email: pawan.sonawane@tcpisek.cz
+  openssh:
+    server:
+      enabled: true
+      user:
+        pawan:
+          enabled: true
+          public_keys:
+            - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCrPyUFTzEkUhd0fu+caRSnCnvXu2K+JkXAsVLL50v5VHNYg+7Y+y5RBPiQueA6L31rnx+3pJzperr/eU4qIswbxg+u7jkud0Wb6ESB9GIMmrpScdovJgCB/ASosyoAlePykeX3qW9OzJEeyQMyioDrjjqBKOLgjx57E33prNaFZ4d9de+uZZARQQ/BeQgOEJ9aFwHyVBgGfYXjjJCIOd3/+T+XeRCmfUvmf8kGrHrHqdJerbGqETWWTkl4wpCBMK0rM8nntaUsEnPqng0Kv9dQd+jU2IqydusCaOMIkHS1LKQfbhQnxSo14z0EwpTnhEpoyAnuhNzzZCYJzKyM12hb pawan@pawan-X555LN
+          user: ${linux:system:user:pawan}

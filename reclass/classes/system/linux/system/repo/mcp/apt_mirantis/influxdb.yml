@@ -1,0 +1,13 @@
+parameters:
+  _param:
+    apt_mk_version: stable
+    linux_system_repo_mcp_influxdb_version: ${_param:apt_mk_version}
+  linux:
+    system:
+      repo:
+        mcp_influxdb:
+          source: "deb [arch=amd64] http://mirror.mirantis.com/${_param:linux_system_repo_mcp_influxdb_version}/influxdb/${_param:linux_system_codename}/ ${_param:linux_system_codename} stable"
+          architectures: amd64
+          key_id: 684A14CF2582E0C5
+          key_server: keyserver.ubuntu.com
+          clean_file: true

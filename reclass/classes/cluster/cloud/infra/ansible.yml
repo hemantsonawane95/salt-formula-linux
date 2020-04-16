@@ -1,0 +1,33 @@
+classes:
+- cluster.cloud
+- cluster.cloud.infra.host
+- cluster.cloud.infra.ceph_common
+- system.linux.system.single
+- system.openssh.server.team.all
+parameters:
+  ntp:
+    client:
+      enabled: true
+      stratum:
+        primary:
+          server: 185.22.96.20
+  linux:
+    system:
+      apparmor:
+        enabled: false
+    network:
+      resolv:
+        dns:
+          - 8.8.8.8
+      interface:
+        primary:
+          name: ens2
+          address: ${_param:single_address} 
+          gateway: 10.12.0.1
+          netmask: 255.255.252.0
+          name_servers:
+            - 8.8.8.8
+          enabled: true
+          type: eth
+          proto: static
+          mtu: 9000

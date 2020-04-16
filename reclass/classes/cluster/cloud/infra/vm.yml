@@ -1,0 +1,65 @@
+classes:
+- cluster.cloud
+- cluster.cloud.infra.host
+- system.linux.system.single
+- system.openssh.server.team.all
+parameters:
+  openssh:
+    server:
+      enabled: true
+      permit_root_login: true
+      public_key_auth: true
+      user:
+        root:
+          enabled: true
+          public_keys:
+            - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtHDQ7VcjV0QsYfvVBAGMjn6BXbnPWUA96ZZe1YflCTuwaBlVYbm6CXB4iad1aqvBE03UNyvRxvHdumTb1wuc+VD4zZF7L9rUZdaMeOpvGj/2Jo/4QpAtbO/Ni2sThcsQqxT/e5gg/Kek7ohkSUbVo3FHskzRJzvR+4ii4Rl0kvGnQVM9gbEp4sXaqEsg8vbZjoJjHow9xtGY1bieyQH5FIV5RCf2ugAR0K/Nd6xErizpgOVKY4CyRaemq2CokDoxZbd82LaR8h49rIY7/7h6RpXLU/mEcetumRw1m0ZlfYYJYeif0hCqvKH0wIQo8Jcpa+LPURvMPmWcHdD1WkWP9
+          user: ${linux:system:user:root}
+        ubuntu:
+          enabled: true
+          public_keys:
+            - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtHDQ7VcjV0QsYfvVBAGMjn6BXbnPWUA96ZZe1YflCTuwaBlVYbm6CXB4iad1aqvBE03UNyvRxvHdumTb1wuc+VD4zZF7L9rUZdaMeOpvGj/2Jo/4QpAtbO/Ni2sThcsQqxT/e5gg/Kek7ohkSUbVo3FHskzRJzvR+4ii4Rl0kvGnQVM9gbEp4sXaqEsg8vbZjoJjHow9xtGY1bieyQH5FIV5RCf2ugAR0K/Nd6xErizpgOVKY4CyRaemq2CokDoxZbd82LaR8h49rIY7/7h6RpXLU/mEcetumRw1m0ZlfYYJYeif0hCqvKH0wIQo8Jcpa+LPURvMPmWcHdD1WkWP9
+          user: ${linux:system:user:ubuntu}
+  linux:
+    system:
+      apparmor:
+        enabled: false
+      user:
+        root:
+          enabled: true
+          name: root
+          home: /root
+          # hariseldon
+          password: $1$XfJPRPLN$VP/4i6FiQ9mr3HesQ35S00
+        ubuntu:
+          enabled: true
+          name: ubuntu
+          sudo: true
+          full_name: ubuntu
+          home: /home/ubuntu
+          email: jr8586335@gmail.com
+    network:
+      interface:
+        ens2:
+          enabled: true
+          mtu: 9000
+          type: eth
+          netmask: 255.255.252.0
+          address: ${_param:single_address}
+          gateway: 10.12.0.1
+        ens4:
+          enabled: true
+          mtu: 9000
+          type: eth
+          netmask: 255.255.252.0
+          address: ${_param:public_address}
+        ens3:
+          enabled: true
+          mtu: 9000
+          type: eth
+          netmask: 255.255.252.0
+          address: ${_param:internal_address}
+      resolv:
+        dns:
+          - 8.8.4.4
+          - 8.8.8.8

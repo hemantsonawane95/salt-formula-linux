@@ -1,0 +1,20 @@
+parameters:
+  linux:
+    system:
+      user:
+        ubuntu:
+          enabled: true
+          name: ubuntu
+          sudo: true
+          full_name: Hemant Sonawane
+          home: /home/ubuntu
+          email: ubuntu.sonawane@tcpisek.cz
+  openssh:
+    server:
+      enabled: true
+      user:
+        ubuntu:
+          enabled: true
+          public_keys:
+            - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFhTCQg5OWIi0zLRE0jJDqfsCUaUKdHpKdVGqT8Keu1os1E9lDT1dLvqH0+u5A71ACPaCi/72I8adS11DlyIfLXkwEYyNfu5WsQ1WKYFp6koI/M18B2YbnO7tP/L3s1Kic2S2LhJIdIg153JHmTxcVJyryeaDYy8/+wY8H1m/gSo++rkG13YQgXsdbtOFIyA4y3j8ywKZr2q8jS8fBr/aQ0GdjWNVbilYskFa3ErAf9zCFz4MFBM+WSRTDuuDCpVMxZ6y+rQ1K4dqihpVzcbieKszsp2frkKQ8oBQUvGkle+wdbz5KEj+LI+wrtfYRQYKDPWFU23ePdhMe7JNBKHkB root@ubuntu 
+          user: ${linux:system:user:ubuntu}

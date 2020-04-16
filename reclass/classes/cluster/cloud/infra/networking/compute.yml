@@ -1,0 +1,59 @@
+parameters:
+  linux:
+    network:
+      interface:
+        primary_nic:
+          name: ${_param:primary_nic}
+          enabled: true
+          type: eth
+          mtu: 9000
+          proto: static
+          address: ${_param:single_address}
+          netmask: ${_param:network_netmask}
+        secondary_nic:
+          name: ${_param:secondary_nic}
+          enabled: true
+          type: eth
+          mtu: 9000
+          proto: manual
+        control_vlan:
+          name: ${_param:secondary_nic}.${_param:control_vlan}
+          enabled: true
+          type: vlan
+          mtu: 9000
+          proto: static
+          address: ${_param:control_address}
+          netmask: ${_param:control_netmask}
+          gateway: ${_param:default_gateway}
+          use_interfaces:
+          - ${_param:secondary_nic}
+        ceph_slow_vlan:
+          name: ${_param:secondary_nic}.${_param:ceph_slow_vlan}
+          enabled: true
+          type: vlan
+          mtu: 9000
+          proto: static
+          address: ${_param:ceph_slow_address}
+          netmask: ${_param:ceph_slow_netmask}
+          use_interfaces:
+          - ${_param:secondary_nic}
+        ceph_fast_vlan:
+          name: ${_param:secondary_nic}.${_param:ceph_fast_vlan}
+          enabled: true
+          type: vlan
+          mtu: 9000
+          proto: static
+          address: ${_param:ceph_fast_address}
+          netmask: ${_param:ceph_fast_netmask}
+          use_interfaces:
+          - ${_param:secondary_nic}
+        test_vlan:
+          name: ${_param:secondary_nic}.${_param:test_vlan}
+          enabled: true
+          type: vlan
+          mtu: 9000
+          proto: static
+          address: ${_param:test_address}
+          netmask: ${_param:test_netmask}
+          use_interfaces:
+          - ${_param:secondary_nic}

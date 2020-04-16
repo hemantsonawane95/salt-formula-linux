@@ -1,0 +1,20 @@
+parameters:
+  linux:
+    system:
+      user:
+        jspunar:
+          enabled: true
+          name: jspunar
+          sudo: true
+          full_name: Michal Novak
+          home: /home/jspunar
+          email: jspunar.novak@itera.io
+  openssh:
+    server:
+      enabled: true
+      user:
+        jspunar:
+          enabled: true
+          public_keys:
+            - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDMDoV/q0s7W8PSfmAkCJFBZXJuzWhsuAn05NEcSFYQPtBPLjOfqULBGvnW1gnJongCVfZXdDHeFp5F0NOOMIV3bh4SHI5415IKVmSnlAxe9m9aWCSXupp5+JKRNTj/Pj0soCp7NxSG7brEbAqh1VyGJILgWQz6YAk5AsxxMd2JZR3WXS/8y3CkK5B9scQw15JsGPPMrJ9MHe9FxDNx9NfK11V6x/TYX6qQGeKxjP1InLHTfMRyF90I/hzn9zydfds4w+bchvNduEnIHyxXl4zOjaiWhELihzH7HSR9dGhfi54GgvdADfQfT9sYoQh0IMdqaCb+6p8j3wSWL/4eaSB1 jakub@itera-think
+          user: ${linux:system:user:jspunar}

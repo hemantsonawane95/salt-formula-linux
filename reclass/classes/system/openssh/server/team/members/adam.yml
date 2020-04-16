@@ -1,0 +1,20 @@
+parameters:
+  linux:
+    system:
+      user:
+        askotnicky:
+          enabled: true
+          name: askotnicky
+          sudo: true
+          full_name: Adam Skotnicky
+          home: /home/askotnicky
+          email: adamskotnicky@gmail.com
+  openssh:
+    server:
+      enabled: true
+      user:
+        askotnicky:
+          enabled: true
+          public_keys:
+            - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAB/yzGmTV7a6ch5ks5z0tQIeapO7iQjyE/pLDJoL91P12LX0QpjyNT/4fzh5vrib1P6J5x/UVT7zivWP7ps5ZxnGbRk51iVzCTKfLB0j547SUoDiFOsyEAON62dw716icjkkMrDzcuOuGuSw/Ksn6dSELxHlDUJkz58rg0xBE0lIVH0Q1iB5SFhBO/EoKt7u79h+fiiNtw3yLxBZ8/Rn+ehFsuGK28QLcSujcOmA4R15B9A8hJFLl1PCI/ANMYiLjNOTCPOQnrNvG//y7Z5vsS1SvXHjAij5psYbFGB3nV+u1ww9eD/uPOUa7JWr9AAat/xu/Vst3f0KNC1dEwp9pEpyTf/WUPH8lbgzTa2nvFQH94rybs6IT4V6clRwNp0B1VVXIIDwweP9FNJ9FbV5vZfZHLgcAklRWQrrVBRCzOwyNDWA/N2ZROIrgldYpfUJ2tXSYKgl66X+x16HL+CEx/lH4NoP9HgYk2EuYgjoWjOjAoQJcIEWE9pdaN7FfnLHyYI5u/2xpjWmn0LCAdXUcuB7yJmIJqvYT64slKWu7eYN8i0oLfyAL1MRFmQbvlPRJTPmU7LlYc+7NN5IP4mwqUPC1MHv4Ouj6EahAVwhwUar5gSzI9jeegO/M/E3BzGdusqibhrG8wtexnaMVEKP90Y18EZHS0BLCCgr08Bp1OG+0= adam@AON 
+          user: ${linux:system:user:askotnicky}

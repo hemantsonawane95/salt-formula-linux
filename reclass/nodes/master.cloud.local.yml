@@ -1,0 +1,28 @@
+classes:
+- cluster.cloud.infra.config
+parameters:
+  _param:
+    salt_master_host: 10.12.0.206
+    salt_master_base_environment: prd
+    salt_formula_branch: master
+    reclass_data_revision: master
+    reclass_data_repository: "git@gitlab.iot.tcpisek.cz:cloud-models/vpc2.git"
+    reclass_config_master: 10.12.0.206
+    linux_system_codename: xenial
+    cluster_name: cloud
+    cluster_domain: cloud.local
+  linux:
+    system:
+      name: master
+      domain: ceph.test
+# ########
+  salt:
+    master:
+      accept_policy: open_mode
+      source:
+        engine: pkg
+    minion:
+      source:
+        engine: pkg
+# ########
+# vim: ft=yaml sw=2 ts=2 sts=2

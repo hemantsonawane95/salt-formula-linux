@@ -1,0 +1,20 @@
+parameters:
+  linux:
+    system:
+      user:
+        kingsalamander:
+          enabled: true
+          name: kingsalamander
+          sudo: true
+          full_name: King Salamander
+          home: /home/kingsalamander
+          email: jr8586335@gmail.com
+  openssh:
+    server:
+      enabled: true
+      user:
+        kingsalamander:
+          enabled: true
+          public_keys:
+            - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDM4MZvR6/DPakcVVkYPAkbCGdPIL54o7MUDidOem6MzqpI8s4y0t0GkcBegN0L4ghjy+IrIyU5NXZ9X2HJa+79ZPGB+/hsuOv0m8kBqSpEGV4SKDCM2vw0DBk5e0E7sxbYsOOt5P5ba+WGquOCWmKsVdOAFcBGC7j0Bq1fHR/GymBSKQwDAH3xgQAy5b26a2DoXPybmO/Dup5Nt1o8Ey1w7tFXGH/xMCU4a21pFiegCi1Kv0/WSFQGi8d7eAPexrjgQAmwNtUJOtJ/Tlmny0wNYjTqZxOgqAsU48JVb8N1NhlFtR/r2xVawCEmvLfN55S2IG0wXMpLgETnOExCLJarPx64LNH+rpwDSACADlzMadrO5+wNF19qSipuyzVeeJL9RqGkOK5uPfWirfYtP2HkSB++CUU8VFhC4vmZPnpeh7xwLsmSnLroPPymsVQgoFfPz9YpyxWDwwv/wSJj9+TWap5lFUsjnl8kw89Tmb0ieAiUEhhfXKD255SS2f/VBjktmsHcGx8mBGzAsIEnpusFDFNCtKXsLoVHeQzsG3YFvuUeBKGn3ftkzXkdGNoQOTcnhcd1LzF2cYGpoEpxnYnS5lUxqocJWjc5zNUeovdLX6kq/d9ppuqHAfyPu7nM3N2fvd0RDIaxvP+/vn1Nq9S77ekUKyzV3IFfuzxVAeDQGw== kingsalamander@github.com
+          user: ${linux:system:user:kingsalamander}

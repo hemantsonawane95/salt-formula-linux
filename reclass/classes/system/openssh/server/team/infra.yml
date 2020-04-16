@@ -1,0 +1,27 @@
+classes:
+- system.openssh.server.team.members.adam
+- system.openssh.server.team.members.chnyda
+- system.openssh.server.team.members.janhes
+- system.openssh.server.team.members.kingsalamander
+- system.openssh.server.team.members.hemant
+- system.openssh.server.team.members.jspunar
+- system.openssh.server.team.members.michal
+- system.openssh.server.team.members.pawan
+- system.openssh.server.team.members.lmercl
+parameters:
+  _param:
+    linux_system_user_sudo: true
+  linux:
+    system:
+      user:
+        root:
+          enabled: true
+          name: root
+          home: /root
+      group:
+        libvirtd:
+          enabled: true
+          name: libvirtd
+  openssh:
+    server:
+      enabled: true

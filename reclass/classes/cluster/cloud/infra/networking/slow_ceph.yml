@@ -1,0 +1,102 @@
+parameters:
+  linux:
+    network:
+      interface:
+        mgmt:
+          name: ${_param:mgmt_nic}
+          enabled: true
+          type: eth
+          mtu: 9000
+          proto: manual
+        primary_nic:
+          name: ${_param:primary_nic}
+          enabled: true
+          type: slave
+          master: bond0
+          mtu: 9000
+          proto: manual
+        secondary_nic:
+          name: ${_param:secondary_nic}
+          enabled: true
+          type: slave
+          master: bond0
+          mtu: 9000
+          proto: manual
+        third_nic:
+          name: ${_param:third_nic}
+          enabled: true
+          type: slave
+          master: bond1
+          mtu: 9000
+          proto: manual
+        fourth_nic:
+          name: ${_param:fourth_nic}
+          enabled: true
+          type: slave
+          master: bond1
+          mtu: 9000
+          proto: manual
+        bond0:
+          enabled: true
+          type: bond
+          proto: manual
+          mtu: 9000
+          mode: active-backup
+          slaves: "${_param:primary_nic} ${_param:secondary_nic}"
+          use_in:
+          - interface: primary_nic
+          - interface: secondary_nic
+        bond1:
+          proto: manual 
+          enabled: true
+          type: bond
+          mtu: 9000
+          mode: active-backup
+          slaves: "${_param:third_nic} ${_param:fourth_nic}"
+          use_in:
+          - interface: third_nic
+          - interface: fourth_nic
+        br0:
+          mtu: 9000
+          enabled: true
+          type: bridge
+          proto: static
+          gateway : 10.11.0.1
+          address: ${_param:single_address}
+          netmask: ${_param:ceph_public_netmask}
+          pre_up_cmds:
+          - sleep 2
+          use_in:
+          - interface: ${_param:mgmt_nic}
+          use_interfaces:
+          - ${_param:mgmt_nic}
+        ceph_private_vlan:
+          name: bond0.${_param:ceph_internal_vlan}
+          address: ${_param:ceph_internal_address}
+          netmask: ${_param:ceph_netmask}
+          enabled: true
+          type: vlan
+          mtu: 9000 
+          proto: static
+          use_in:
+          - interface: bond0
+        ceph_public_vlan:
+          name: bond0.${_param:ceph_public_vlan}
+          enabled: true
+          type: vlan 
+          mtu: 9000 
+          proto: manual
+          use_in:
+          - interface: bond1
+        br1:
+          mtu: 9000
+          enabled: true
+          type: bridge
+          address: ${_param:ceph_public_address}
+          netmask: ${_param:ceph_public_netmask}
+          pre_up_cmds:
+          - sleep 2
+          use_in:
+          - interface: ceph_public_vlan
+          use_interfaces:
+          - bond0.${_param:ceph_public_vlan} 

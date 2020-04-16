@@ -1,0 +1,20 @@
+parameters:
+  linux:
+    system:
+      user:
+        lmercl:
+          enabled: true
+          name: lmercl
+          sudo: true
+          full_name: Lubos Mercl
+          home: /home/lmercl
+          email: lmercl.sonawane@tcpisek.cz
+  openssh:
+    server:
+      enabled: true
+      user:
+        lmercl:
+          enabled: true
+          public_keys:
+            - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHLQt0YgRUAr8E0hH23AChxKAvG5jgNIlmUNCC9pZbxqrXPWjf+1UdXvo+Rsj+DFBlnRq/EyatHcSnyAJcll6ZBbuhwLGOZ+iLHog0fh1o9Jf0hMZV3Vw4l3KTAwS4qgZx8C9IKyYpI/zcrOOU+2kkolOialpSNG20MGW5ot3FqJpqAxUgSYCOoYuKIYyhvcXY/NS3tKm7bSniTfMHfOkfSBTSyvYqRsoR1dLeaN5rarVZOHHQHshi8817fIFFSZPDZcqqsqAdxFINY22gdmvrYJ4ujKVjXlmTQo8EnH7bRnOUb1LAyDDyiNgqIqP6E2M6wiL9p6wqDKGHXi8kVPvv lmercl@lmercl-macbook
+          user: ${linux:system:user:lmercl}

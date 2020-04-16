@@ -1,0 +1,20 @@
+parameters:
+  linux:
+    system:
+      user:
+        hemant:
+          enabled: true
+          name: hemant
+          sudo: true
+          full_name: Hemant Sonawane
+          home: /home/hemant
+          email: hemant.sonawane@tcpisek.cz
+  openssh:
+    server:
+      enabled: true
+      user:
+        hemant:
+          enabled: true
+          public_keys:
+            - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAF4CFMJubziiSXE3J+49ZFLIwhqYoDZ8eHSbuVfBmIPuk6eugCq0I/aybfUG1WIC2WDOA5cgbWOwqmZ7tf9QYSxgDexCLl3ojNGM9fQ9UaDzHa1EPgNS0JB1LFGgG8RlFsvzKdQU+yW/GZfWzrWwY8Gqt4MQXb8P8uQa7vDsXKkB/PXtfTQlsxR2fZDt6XyjYwBaobXvWr/wb8k4Tubi+EKao592KVJf2PMqo66gOQ7bP9CKYZd3MziHzYYOlX1xCZ38q1zWP+tpt7onR6jHrYfMooNgcgG5kV2eqtLgZAmNG5mH4lCRP7e+zWajqiczIJbWPHofbgdXw9M1aJqk3 hemant@hemant-ThinkPad-E470 
+          user: ${linux:system:user:hemant}

@@ -1,0 +1,6 @@
+classes:
+- system.openssh.server.team.infra
+- system.openssh.server.team.admin
+parameters:
+  _param:
+    linux_system_user_sudo: true

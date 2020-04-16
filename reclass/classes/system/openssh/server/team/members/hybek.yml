@@ -1,0 +1,19 @@
+parameters:
+  linux:
+    system:
+      user:
+        hybek:
+          enabled: true
+          name: hybek
+          sudo: true
+          full_name: Jan Hes
+          home: /home/hybek
+  openssh:
+    server:
+      enabled: true
+      user:
+        hybek:
+          enabled: true
+          public_keys:
+            - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCgbsQ642wo8vBLZ5Dno3Md+qbnTZP3svNJhlStWjz7eQot/fb+ZNuxdswUpop9cG2lM9cUx7NdQPlYxnQOq0owl++ZxbPqzHtzLvyFNzQm38Hb0rDIKQkoiq2S8dqay7xeIKiCkWGDOrRzRcWcYPerR5RroI0pL/ubtipAwGzZydPAtoKLxPYnaA/xAbKciLMz++ciuEIxoaAsZFouKn58357KutOsRpVFXfGIh2KvnLFfh2VaULq1ymst4Jyh3Vt/846a+Gz5a7z7wB2GcSiGL1ic1Y8kfgMg+B1NnXyKfVnWvZ4S2lk5zBxSxkjIAZS+Jx5HMPbYFEaXa946yLmH jiri@hybek.cz 
+          user: ${linux:system:user:hybek}

@@ -1,0 +1,30 @@
+classes:
+- cluster.cloud
+- cluster.cloud.infra.host
+- cluster.cloud.infra.ceph_common
+- system.linux.system.single
+- system.openssh.server.team.all
+- cluster.cloud.infra.ssh
+parameters:
+  linux:
+    network:
+      interface:
+        ens3:
+          name: ens3
+          enabled: true
+          type: eth
+          mtu: 9000
+          proto: static
+          address: ${_param:single_address}
+          netmask: ${_param:network_netmask}
+          gateway: 10.11.0.1
+        ens4:
+          name: ens4
+          enabled: true
+          type: eth
+          mtu: 9000
+          proto: static
+          address: ${_param:ceph_public_address}
+          netmask: ${_param:network_netmask}
+    
+    

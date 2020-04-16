@@ -1,0 +1,60 @@
+classes:
+- cluster.deployment
+- cluster.deployment.infra.host
+- system.linux.system.single
+- system.openssh.server.team.all
+- cluster.deployment.infra.ssh
+parameters:
+  linux:
+#    network:
+#      interfaces:
+#      eth0:
+#        enabled: true
+#        type: eth
+#        address: ${_param:single_address}
+#        netmask: 255.255.252.0
+#        gateway: 10.11.0.1
+#        name_servers:
+#        - 8.8.8.8
+#        - 8.8.4.4
+#        mtu: 1500
+    network:
+      resolv:
+        dns:
+        - 10.233.0.3
+        - 8.8.4.4
+        - 8.8.8.8
+    system:
+      file:
+        /etc/docker/daemon.json:
+          contents: |
+            {
+              "bip": "192.168.63.1/24",
+              "live-restore": true
+            }
+      package:
+        ebtables:
+          version: latest
+        ceph-common:
+          version: latest
+      kernel:
+        sriov: True
+        module:
+          kvm-intel:
+            option:
+              nested: y
+        sysctl:
+          net.bridge.bridge-nf-call-iptables: 1
+          net.ipv4.ip_forward: 1
+          net.ipv4.tcp_mtu_probing: 2
+          net.ipv4.conf.default.rp_filter: 0
+          net.ipv4.conf.all.rp_filter: 0
+      apparmor:
+        enabled: false
+      user:
+        root:
+          enabled: true
+          name: root
+          home: /root
+          # hariseldon
+          password: $1$XfJPRPLN$VP/4i6FiQ9mr3HesQ35S00

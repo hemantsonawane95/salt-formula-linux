@@ -1,0 +1,20 @@
+parameters:
+  linux:
+    system:
+      user:
+        michal:
+          enabled: true
+          name: michal
+          sudo: true
+          full_name: Michal Novak
+          home: /home/michal
+          email: michal.novak@itera.io
+  openssh:
+    server:
+      enabled: true
+      user:
+        michal:
+          enabled: true
+          public_keys:
+            - key: AAAAB3NzaC1yc2EAAAADAQABAAACAQDYPIOEvl4W37EqGBEyvxGFyVDDCEL0KbDMKFnuU+rbzi85WT6KhRJUlEYnLK0dDPZvd+eJXXDCeKEh99+5phZczoPtzlGPknhStBo9iOY7WiT3ePi3VaUGGpNnjaKKsg+GAhniYK2KW37aRgYyWV5Of4izTzKd0uguAd4k0Ti77jiqVVoay6XPZgqPBTIdzznnnXOx1OPMGOjcnctMzbxuA4CxnHcnmr9LXkZxthmpSg7ZsgJDjVo5cZjY1zPRLkdHRqpHx6foluemv57VvM+wg0C/wZLEZkktyYTqoCwRRxKFL+sOLvsNo39fhsgKjELUZfeqL2X+SWc8xJlId+WXxLMokfetlVgArFm8HxcYRvAhHeu9UC20fBl4bWx8VQ7tYBF1NscDm0qvIolS2cR/4iHwvvrx3iFU3LY77TtoakZzDlzlhjIaDkhYNTKPaEUmtFKbZmacYb5YyuhTwPqpNpySuJjl+xqNObzmHe/nECUmwyAcXt03QhnCeyn2+VcAEJYAaGcokKcKwsAYw9JTtKO35Fb9+2qnPV3wGRv64X6LfGB6xu8IWJAU/TE2Zb9hCM4RDL2S4IWk6WjE/DbEE10tAACdCcb3MMk+9LyhuIT7mrAbNMrVRELUVKt8bVkqtijj0YVR0KHjM9WYf8cthtLaUHUZgRwd0ij5cqsSrQ==
+          user: ${linux:system:user:michal}
